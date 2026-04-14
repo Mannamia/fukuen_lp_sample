@@ -1,0 +1,477 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --sea-lightest: #F0F6F8;
+    --sea-light: #D6EBF0;
+    --sea-mid: #8BBFCC;
+    --sea-deep: #3D7D93;
+    --sea-dark: #1C4A5A;
+    --sand: #F5EFE6;
+    --sand-warm: #EDE3D5;
+    --text-main: #1A2F38;
+    --text-sub: #4A6872;
+    --text-muted: #7A9BA8;
+    --white: #FFFFFF;
+    --font: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif;
+  }
+  body { font-family: var(--font); background: var(--white); color: var(--text-main); line-height: 1.7; }
+
+  /* NAV */
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 40px; background: rgba(255,255,255,0.97); border-bottom: 0.5px solid var(--sea-light); position: sticky; top: 0; z-index: 100; }
+  .nav-logo { font-size: 12px; letter-spacing: 0.16em; color: var(--sea-dark); font-weight: 500; }
+  .nav-links { display: flex; gap: 22px; }
+  .nav-links a { font-size: 11px; letter-spacing: 0.1em; color: var(--text-sub); text-decoration: none; }
+  .nav-links a:hover { color: var(--sea-deep); }
+  .nav-cta { font-size: 11px; letter-spacing: 0.1em; color: var(--white); background: var(--sea-dark); padding: 9px 20px; border-radius: 2px; cursor: pointer; border: none; font-family: var(--font); }
+  .nav-cta:hover { background: var(--sea-deep); }
+
+  /* HERO */
+  .hero { position: relative; min-height: 500px; background: linear-gradient(155deg, #EBF4F7 0%, #D8EDF3 45%, #F0EBE3 100%); display: flex; align-items: center; overflow: hidden; }
+  .hero-waves { position: absolute; bottom: 0; left: 0; right: 0; height: 110px; opacity: 0.3; }
+  .hero-inner { padding: 80px 64px; max-width: 600px; position: relative; z-index: 2; }
+  .hero-label { font-size: 10px; letter-spacing: 0.3em; color: var(--sea-deep); margin-bottom: 18px; }
+  .hero-title { font-size: 32px; line-height: 1.65; color: var(--sea-dark); font-weight: 500; margin-bottom: 24px; }
+  .hero-sub { font-size: 14px; line-height: 2; color: var(--text-sub); margin-bottom: 36px; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary { font-size: 12px; letter-spacing: 0.1em; color: var(--white); background: var(--sea-dark); padding: 14px 28px; border: none; border-radius: 2px; cursor: pointer; font-family: var(--font); }
+  .btn-primary:hover { background: var(--sea-deep); }
+  .btn-secondary { font-size: 12px; letter-spacing: 0.1em; color: var(--sea-dark); background: transparent; padding: 13px 28px; border: 0.5px solid var(--sea-mid); border-radius: 2px; cursor: pointer; font-family: var(--font); }
+  .btn-secondary:hover { background: var(--sea-lightest); }
+  .hero-badge { position: absolute; right: 64px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.85); border: 0.5px solid var(--sea-light); border-radius: 50%; width: 150px; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; z-index: 2; }
+  .hero-badge-num { font-size: 30px; font-weight: 500; color: var(--sea-dark); line-height: 1; }
+  .hero-badge-unit { font-size: 10px; color: var(--text-sub); letter-spacing: 0.1em; margin-top: 6px; }
+
+  /* SECTIONS */
+  .section { padding: 72px 40px; }
+  .section-label { font-size: 10px; letter-spacing: 0.3em; color: var(--sea-deep); margin-bottom: 10px; }
+  .section-title { font-size: 22px; font-weight: 500; color: var(--sea-dark); line-height: 1.6; margin-bottom: 40px; }
+
+  /* WORRY */
+  .worry-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: var(--sea-light); border: 0.5px solid var(--sea-light); }
+  .worry-item { background: var(--white); padding: 22px 18px; display: flex; align-items: flex-start; gap: 10px; }
+  .worry-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--sea-mid); margin-top: 8px; flex-shrink: 0; }
+  .worry-text { font-size: 13px; line-height: 1.85; color: var(--text-sub); }
+
+  /* WHAT */
+  .what-section { background: var(--sea-lightest); padding: 72px 40px; }
+  .what-inner { max-width: 800px; margin: 0 auto; }
+  .what-desc { font-size: 14px; line-height: 2; color: var(--text-sub); margin-bottom: 40px; }
+  .feature-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .feature-card { background: var(--white); border: 0.5px solid var(--sea-light); border-radius: 2px; padding: 28px 22px; }
+  .feature-num { font-size: 10px; letter-spacing: 0.2em; color: var(--sea-mid); margin-bottom: 12px; }
+  .feature-title { font-size: 14px; font-weight: 500; color: var(--sea-dark); margin-bottom: 10px; line-height: 1.6; }
+  .feature-body { font-size: 12px; line-height: 1.85; color: var(--text-sub); }
+
+  /* PROFILE */
+  .profile-section { padding: 72px 40px; background: var(--white); }
+  .profile-inner { display: grid; grid-template-columns: 1fr 1.6fr; gap: 56px; align-items: start; max-width: 860px; margin: 0 auto; }
+  .profile-img-placeholder { background: var(--sand); border-radius: 2px; height: 320px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 11px; letter-spacing: 0.1em; border: 0.5px solid var(--sand-warm); }
+  .profile-role { font-size: 10px; letter-spacing: 0.25em; color: var(--sea-deep); margin-bottom: 8px; }
+  .profile-name-ja { font-size: 22px; font-weight: 500; color: var(--sea-dark); margin-bottom: 4px; }
+  .profile-name-en { font-size: 11px; letter-spacing: 0.2em; color: var(--text-muted); margin-bottom: 20px; }
+  .profile-body { font-size: 13px; line-height: 2; color: var(--text-sub); margin-bottom: 16px; }
+  .stats-row { display: flex; gap: 28px; padding-top: 20px; border-top: 0.5px solid var(--sea-light); }
+  .stat-num { font-size: 26px; font-weight: 500; color: var(--sea-dark); line-height: 1; }
+  .stat-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.1em; margin-top: 4px; }
+  .media-note { font-size: 12px; color: var(--text-muted); margin-top: 16px; padding: 12px 14px; background: var(--sea-lightest); border-left: 2px solid var(--sea-mid); border-radius: 0 2px 2px 0; }
+
+  /* PLANS */
+  .plans-section { background: var(--sand); padding: 72px 40px; }
+  .plans-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 40px; }
+  .plan-card { background: var(--white); border: 0.5px solid #DDD5C8; border-radius: 2px; padding: 32px 22px; position: relative; }
+  .plan-card.featured { border: 1.5px solid var(--sea-deep); }
+  .plan-badge { position: absolute; top: -11px; left: 22px; background: var(--sea-dark); color: var(--white); font-size: 10px; letter-spacing: 0.1em; padding: 3px 10px; border-radius: 1px; font-family: var(--font); }
+  .plan-name { font-size: 11px; letter-spacing: 0.18em; color: var(--text-muted); margin-bottom: 10px; }
+  .plan-price { font-size: 28px; font-weight: 500; color: var(--sea-dark); line-height: 1; margin-bottom: 4px; }
+  .plan-unit { font-size: 11px; color: var(--text-muted); margin-bottom: 18px; }
+  .plan-desc { font-size: 12px; line-height: 1.85; color: var(--text-sub); margin-bottom: 18px; border-top: 0.5px solid #EEE; padding-top: 16px; }
+  .plan-features { list-style: none; }
+  .plan-features li { font-size: 12px; color: var(--text-sub); padding: 6px 0; border-bottom: 0.5px solid #F2F2F2; display: flex; gap: 8px; align-items: center; }
+  .plan-features li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--sea-mid); flex-shrink: 0; }
+  .plan-features li.off { color: var(--text-muted); opacity: 0.45; }
+  .plan-features li.off::before { background: #ccc; }
+  .plan-btn { width: 100%; margin-top: 22px; padding: 12px; font-size: 12px; letter-spacing: 0.1em; cursor: pointer; border-radius: 2px; border: 0.5px solid var(--sea-mid); background: transparent; color: var(--sea-dark); font-family: var(--font); }
+  .plan-btn:hover { background: var(--sea-lightest); }
+  .plan-card.featured .plan-btn { background: var(--sea-dark); color: var(--white); border-color: var(--sea-dark); }
+  .plan-card.featured .plan-btn:hover { background: var(--sea-deep); }
+  .plan-note { font-size: 11px; color: var(--text-muted); margin-top: 20px; text-align: center; }
+
+  /* SALON */
+  .salon-section { padding: 72px 40px; background: var(--white); }
+  .salon-inner { max-width: 860px; margin: 0 auto; }
+  .salon-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: start; margin-top: 40px; }
+  .salon-visual { background: linear-gradient(140deg, #1C4A5A 0%, #2E6B82 60%, #3D8DA6 100%); border-radius: 2px; padding: 40px 32px; color: var(--sea-lightest); }
+  .salon-visual-title { font-size: 10px; letter-spacing: 0.3em; color: var(--sea-mid); margin-bottom: 12px; }
+  .salon-visual-name { font-size: 20px; font-weight: 500; line-height: 1.55; margin-bottom: 20px; }
+  .salon-tag { display: inline-block; font-size: 10px; letter-spacing: 0.1em; color: var(--sea-mid); border: 0.5px solid var(--sea-mid); padding: 3px 10px; border-radius: 1px; margin-bottom: 6px; margin-right: 4px; }
+  .salon-price-block { margin-top: 24px; border-top: 0.5px solid rgba(139,191,204,0.3); padding-top: 20px; }
+  .salon-price { font-size: 14px; font-weight: 500; color: var(--sea-lightest); }
+  .salon-price-note { font-size: 11px; color: var(--sea-mid); margin-top: 6px; }
+  .salon-cta { display: block; margin-top: 20px; width: 100%; padding: 13px; text-align: center; background: rgba(255,255,255,0.12); border: 0.5px solid rgba(255,255,255,0.3); color: var(--sea-lightest); font-size: 12px; letter-spacing: 0.1em; cursor: pointer; border-radius: 2px; font-family: var(--font); text-decoration: none; }
+  .salon-cta:hover { background: rgba(255,255,255,0.2); }
+  .salon-subtitle { font-size: 13px; font-weight: 500; color: var(--sea-dark); margin-bottom: 16px; }
+  .salon-benefit-list { list-style: none; }
+  .salon-benefit-list li { font-size: 13px; color: var(--text-sub); padding: 10px 0; border-bottom: 0.5px solid var(--sea-light); display: flex; align-items: flex-start; gap: 10px; line-height: 1.75; }
+  .salon-benefit-list li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--sea-mid); flex-shrink: 0; margin-top: 8px; }
+  .salon-discount { margin-top: 20px; background: var(--sea-lightest); border: 0.5px solid var(--sea-light); border-radius: 2px; padding: 16px 18px; }
+  .salon-discount-label { font-size: 10px; letter-spacing: 0.2em; color: var(--sea-deep); margin-bottom: 6px; }
+  .salon-discount-text { font-size: 13px; color: var(--sea-dark); font-weight: 500; }
+
+  /* NOTE */
+  .note-section { background: var(--sea-lightest); padding: 72px 40px; }
+  .note-inner { max-width: 860px; margin: 0 auto; }
+  .note-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 40px; }
+  .note-card { background: var(--white); border: 0.5px solid var(--sea-light); border-radius: 2px; padding: 28px 24px; display: flex; flex-direction: column; gap: 12px; cursor: pointer; text-decoration: none; }
+  .note-card:hover { border-color: var(--sea-mid); }
+  .note-card-tag { font-size: 10px; letter-spacing: 0.2em; color: var(--sea-deep); background: var(--sea-lightest); border: 0.5px solid var(--sea-light); padding: 3px 10px; border-radius: 1px; display: inline-block; align-self: flex-start; }
+  .note-card-title { font-size: 14px; font-weight: 500; color: var(--sea-dark); line-height: 1.65; }
+  .note-card-body { font-size: 12px; color: var(--text-sub); line-height: 1.85; flex: 1; }
+  .note-card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 0.5px solid var(--sea-light); }
+  .note-card-date { font-size: 11px; color: var(--text-muted); }
+  .note-card-link { font-size: 11px; color: var(--sea-deep); letter-spacing: 0.05em; }
+  .note-more { display: block; margin: 28px auto 0; font-size: 12px; letter-spacing: 0.1em; color: var(--sea-dark); background: transparent; border: 0.5px solid var(--sea-mid); padding: 12px 28px; border-radius: 2px; cursor: pointer; font-family: var(--font); }
+  .note-more:hover { background: var(--sea-lightest); }
+
+  /* SNS */
+  .sns-section { background: var(--sea-dark); padding: 60px 40px; }
+  .sns-title { font-size: 19px; font-weight: 500; color: var(--sea-lightest); margin-bottom: 8px; }
+  .sns-sub { font-size: 13px; color: var(--sea-mid); margin-bottom: 32px; line-height: 1.85; }
+  .sns-links { display: flex; gap: 10px; flex-wrap: wrap; }
+  .sns-btn { display: flex; align-items: center; gap: 8px; padding: 10px 18px; border: 0.5px solid rgba(139,191,204,0.35); border-radius: 2px; color: var(--sea-lightest); font-size: 12px; letter-spacing: 0.1em; text-decoration: none; cursor: pointer; background: transparent; font-family: var(--font); }
+  .sns-btn:hover { background: rgba(255,255,255,0.08); }
+  .sns-icon { width: 15px; height: 15px; fill: var(--sea-mid); flex-shrink: 0; }
+
+  /* VOICE */
+  .voice-section { padding: 72px 40px; background: var(--white); }
+  .voice-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 40px; }
+  .voice-card { border: 0.5px solid var(--sea-light); border-radius: 2px; padding: 24px 20px; background: var(--sea-lightest); }
+  .voice-text { font-size: 13px; line-height: 1.9; color: var(--text-sub); margin-bottom: 14px; }
+  .voice-name { font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em; }
+
+  /* FREE CTA */
+  .free-section { padding: 80px 40px; background: var(--sand); text-align: center; }
+  .free-lead { font-size: 14px; color: var(--text-sub); line-height: 2; margin: 0 auto 32px; max-width: 460px; }
+  .free-disclaimer { font-size: 11px; color: var(--text-muted); margin-top: 14px; }
+
+  /* FOOTER */
+  .footer { background: var(--sea-dark); padding: 48px 40px 24px; }
+  .footer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 36px; flex-wrap: wrap; gap: 24px; }
+  .footer-logo { font-size: 12px; letter-spacing: 0.18em; color: var(--sea-lightest); margin-bottom: 8px; }
+  .footer-tagline { font-size: 11px; color: var(--sea-mid); }
+  .footer-links { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+  .footer-links a { font-size: 11px; color: var(--sea-mid); text-decoration: none; letter-spacing: 0.1em; }
+  .footer-links a:hover { color: var(--sea-lightest); }
+  .footer-bottom { border-top: 0.5px solid rgba(139,191,204,0.2); padding-top: 20px; font-size: 10px; color: var(--sea-mid); letter-spacing: 0.1em; }
+
+  @media (max-width: 680px) {
+    .hero-inner { padding: 60px 24px; }
+    .hero-badge { display: none; }
+    .feature-row, .plans-grid, .voice-grid, .salon-grid, .note-grid { grid-template-columns: 1fr; }
+    .profile-inner { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .section, .what-section, .plans-section, .voice-section, .profile-section, .salon-section, .note-section { padding: 56px 24px; }
+    .sns-section, .free-section, .footer { padding-left: 24px; padding-right: 24px; }
+  }
+</style>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">岡田ひろふみ ／ 戦略的復縁プラン</div>
+  <div class="nav-links">
+    <a href="#">サービスとは</a>
+    <a href="#">プラン</a>
+    <a href="#">サロン</a>
+    <a href="#">お客様の声</a>
+  </div>
+  <button class="nav-cta" onclick="sendPrompt('無料相談の申し込み方法を教えてください')">無料相談する</button>
+</nav>
+
+<!-- 1. HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-label">Love &amp; Reunion Consulting</p>
+    <h1 class="hero-title">ひとりで抱えないで。<br>あなたの恋愛に、<br>寄り添う専門家がいます。</h1>
+    <p class="hero-sub">復縁・不倫・夫婦・片思い——どんなお悩みも、<br>まずは話してみてください。<br>判断されることはありません。</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="sendPrompt('無料メール相談について教えてください')">無料で相談してみる</button>
+      <button class="btn-secondary" onclick="sendPrompt('プラン一覧を見せてください')">プランを見る</button>
+    </div>
+  </div>
+  <div class="hero-badge">
+    <div class="hero-badge-num">20,000+</div>
+    <div class="hero-badge-unit">累計相談件数</div>
+  </div>
+  <svg class="hero-waves" viewBox="0 0 1200 120" preserveAspectRatio="none">
+    <path d="M0,60 C200,100 400,20 600,60 C800,100 1000,20 1200,60 L1200,120 L0,120 Z" fill="#D0E8F0"/>
+    <path d="M0,80 C300,40 600,100 900,65 C1100,40 1150,75 1200,60 L1200,120 L0,120 Z" fill="#C0DCE8" opacity="0.55"/>
+  </svg>
+</section>
+
+<!-- 2. WORRY -->
+<section class="section">
+  <p class="section-label">こんなお悩みはありませんか</p>
+  <h2 class="section-title">ひとつでも当てはまったら、<br>ひとりで解決しようとしないでください。</h2>
+  <div class="worry-grid">
+    <div class="worry-item"><div class="worry-dot"></div><p class="worry-text">彼の本当の気持ちが知りたい</p></div>
+    <div class="worry-item"><div class="worry-dot"></div><p class="worry-text">連絡したいけど、嫌われるのが怖い</p></div>
+    <div class="worry-item"><div class="worry-dot"></div><p class="worry-text">別れてもずっと彼のことが頭から離れない</p></div>
+    <div class="worry-item"><div class="worry-dot"></div><p class="worry-text">周囲に反対されるけど、よりを戻したい</p></div>
+    <div class="worry-item"><div class="worry-dot"></div><p class="worry-text">ネットの情報が多すぎて、何が正しいかわからない</p></div>
+    <div class="worry-item"><div class="worry-dot"></div><p class="worry-text">自分を変えたいけど、どうすればいいかわからない</p></div>
+  </div>
+</section>
+
+<!-- 3. WHAT -->
+<section class="what-section">
+  <div class="what-inner">
+    <p class="section-label">戦略的復縁プランとは</p>
+    <h2 class="section-title">マニュアルではなく、<br>あなたの状況に合わせた<br>オーダーメイドの戦略を。</h2>
+    <p class="what-desc">「冷却期間が大事」「LINEはこう送れ」——そんな一般論はすべての人に当てはまるわけではありません。岡田ひろふみの戦略的復縁プランは、お相手の男性心理を深く読み解き、あなたのケースに特化したアドバイスをご提供します。</p>
+    <div class="feature-row">
+      <div class="feature-card">
+        <p class="feature-num">01</p>
+        <h3 class="feature-title">男性心理を読む、独自のアプローチ</h3>
+        <p class="feature-body">男性目線で10年以上研究を重ねた、他にはないメソッドで状況を分析します。</p>
+      </div>
+      <div class="feature-card">
+        <p class="feature-num">02</p>
+        <h3 class="feature-title">岡田ひろふみ本人が直接サポート</h3>
+        <p class="feature-body">スタッフへの丸投げは一切なし。すべてのやり取りは岡田本人が担当します。</p>
+      </div>
+      <div class="feature-card">
+        <p class="feature-num">03</p>
+        <h3 class="feature-title">秘密は固く守られます</h3>
+        <p class="feature-body">ご相談の内容は完全な守秘義務のもとで扱われます。安心してお話しください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. PROFILE -->
+<section class="profile-section">
+  <div class="profile-inner">
+    <div class="profile-img-placeholder">岡田ひろふみ 写真</div>
+    <div>
+      <p class="profile-role">復縁プランナー</p>
+      <h2 class="profile-name-ja">岡田 ひろふみ</h2>
+      <p class="profile-name-en">Hirofumi Okada</p>
+      <p class="profile-body">2011年、男性心理に特化した"女性のための復縁プランナー"として実名・顔出しでデビュー。業界では初の取り組みでした。<br><br>多くの相談に向き合ってきた中で確信したことがあります。「復縁や恋愛の正解は、ひとつではない」ということ。型にはまったアドバイスではなく、あなたの状況をしっかりと聞いた上で戦略を組み立てます。</p>
+      <p class="media-note">テレビ（地上波・CS）、ネットTV、女性雑誌など多数のメディアで紹介されました。</p>
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-num">20,000+</div><div class="stat-label">累計相談件数</div></div>
+        <div class="stat-item"><div class="stat-num">10年+</div><div class="stat-label">サービス歴</div></div>
+        <div class="stat-item"><div class="stat-num">2,000+</div><div class="stat-label">喜びの声</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. PLANS -->
+<section class="plans-section">
+  <p class="section-label">サポートプラン</p>
+  <h2 class="section-title">はじめての方も、<br>継続サポートが必要な方も。</h2>
+  <div class="plans-grid">
+    <div class="plan-card">
+      <p class="plan-name">お試し相談プラン</p>
+      <div class="plan-price">¥3,500</div>
+      <div class="plan-unit">30分 / 1回</div>
+      <p class="plan-desc">まず話してみたい方へ。気軽に試せる入門プランです。</p>
+      <ul class="plan-features">
+        <li>電話相談（30分）</li>
+        <li class="off">LINEサポート（無制限）</li>
+        <li class="off">メッセージ添削</li>
+        <li class="off">緊急連絡対応</li>
+      </ul>
+      <button class="plan-btn" onclick="sendPrompt('お試し相談プランで申し込む方法を教えてください')">このプランで相談する</button>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-badge">人気</div>
+      <p class="plan-name">ベーシックプラン</p>
+      <div class="plan-price">¥18,000</div>
+      <div class="plan-unit">30日間</div>
+      <p class="plan-desc">電話・LINE・メール。継続的に伴走してほしい方に。</p>
+      <ul class="plan-features">
+        <li>電話相談（30分）</li>
+        <li>LINEサポート（無制限）</li>
+        <li>メッセージ添削</li>
+        <li class="off">緊急連絡対応</li>
+      </ul>
+      <button class="plan-btn" onclick="sendPrompt('ベーシックプランで申し込む方法を込む方法を教えてください')">このプランで相談する</button>
+    </div>
+    <div class="plan-card">
+      <p class="plan-name">復縁スタートプラン</p>
+      <div class="plan-price">¥6,600</div>
+      <div class="plan-unit">1時間 / 1回</div>
+      <p class="plan-desc">じっくり話したい方、具体的なアドバイスが欲しい方へ。</p>
+      <ul class="plan-features">
+        <li>電話相談（1時間）</li>
+        <li class="off">LINEサポート（無制限）</li>
+        <li class="off">メッセージ添削</li>
+        <li class="off">緊急連絡対応</li>
+      </ul>
+      <button class="plan-btn" onclick="sendPrompt('復縁スタートプランで申し込む方法を教えてください')">このプランで相談する</button>
+    </div>
+  </div>
+  <p class="plan-note">※ オンラインサロン会員はすべてのプランが30%OFF</p>
+</section>
+
+<!-- 6. SALON -->
+<section class="salon-section">
+  <div class="salon-inner">
+    <p class="section-label">オンラインサロン</p>
+    <h2 class="section-title">毎日の学びと仲間が、<br>あなたの恋愛を変えていく。</h2>
+    <div class="salon-grid">
+      <div class="salon-visual">
+        <p class="salon-visual-title">DMM オンラインサロン</p>
+        <h3 class="salon-visual-name">戦略的復縁サロン<br>〜男性心理研究会〜</h3>
+        <div>
+          <span class="salon-tag">復縁</span>
+          <span class="salon-tag">男性心理</span>
+          <span class="salon-tag">恋愛戦略</span>
+        </div>
+        <div class="salon-price-block">
+          <p class="salon-price">月額制コミュニティ</p>
+          <p class="salon-price-note">相談プランが30%OFFになる会員特典つき</p>
+        </div>
+        <a class="salon-cta" href="https://lounge.dmm.com/detail/6596/index/" target="_blank">サロンの詳細を見る →</a>
+      </div>
+      <div>
+        <p class="salon-subtitle">サロンでできること</p>
+        <ul class="salon-benefit-list">
+          <li>岡田ひろふみによる男性心理の深掘り解説を毎日受け取れる</li>
+          <li>同じ悩みを持つ仲間とつながり、一人じゃないと感じられる</li>
+          <li>個別相談よりも気軽に、日々の悩みを相談できる場がある</li>
+          <li>復縁・恋愛に関する実践的なノウハウをストックできる</li>
+          <li>過去のアーカイブでいつでも学び直せる</li>
+        </ul>
+        <div class="salon-discount">
+          <p class="salon-discount-label">会員特典</p>
+          <p class="salon-discount-text">個別相談プランがすべて30%OFFに</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. NOTE -->
+<section class="note-section">
+  <div class="note-inner">
+    <p class="section-label">note</p>
+    <h2 class="section-title">恋愛・復縁のヒントを、<br>読みやすい記事でお届けしています。</h2>
+    <div class="note-grid">
+      <a class="note-card" href="https://note.com/" target="_blank">
+        <span class="note-card-tag">復縁</span>
+        <p class="note-card-title">LINEブロックや削除から復縁する手順【成功率UP】</p>
+        <p class="note-card-body">ブロックや削除をされてしまったとき、多くの方が「もう終わりだ」と感じます。しかし、状況を正しく読めば動ける方法はあります。</p>
+        <div class="note-card-footer">
+          <span class="note-card-date">2026.02.19</span>
+          <span class="note-card-link">記事を読む →</span>
+        </div>
+      </a>
+      <a class="note-card" href="https://note.com/" target="_blank">
+        <span class="note-card-tag">男性心理</span>
+        <p class="note-card-title">別れを切り出した男性が「戻りたい」と思う瞬間とは</p>
+        <p class="note-card-body">別れを告げた側の男性でも、後悔することはあります。その心理のメカニズムと、あなたがとるべき行動を解説します。</p>
+        <div class="note-card-footer">
+          <span class="note-card-date">2026.01.14</span>
+          <span class="note-card-link">記事を読む →</span>
+        </div>
+      </a>
+      <a class="note-card" href="https://note.com/" target="_blank">
+        <span class="note-card-tag">片思い</span>
+        <p class="note-card-title">好きな人に「脈なし」と感じたときに試してほしいこと</p>
+        <p class="note-card-body">「脈なし」と判断するのは、まだ早いかもしれません。男性が見せる「興味のなさ」の裏にある心理を読み解きます。</p>
+        <div class="note-card-footer">
+          <span class="note-card-date">2025.12.08</span>
+          <span class="note-card-link">記事を読む →</span>
+        </div>
+      </a>
+      <a class="note-card" href="https://note.com/" target="_blank">
+        <span class="note-card-tag">夫婦・不倫</span>
+        <p class="note-card-title">不倫関係を整理したい、でも忘れられない——そのとき考えること</p>
+        <p class="note-card-body">終わらせたいのに終わらせられない関係は、なぜ生まれるのか。感情の整理の仕方と、前に進むためのヒントをお伝えします。</p>
+        <div class="note-card-footer">
+          <span class="note-card-date">2025.11.22</span>
+          <span class="note-card-link">記事を読む →</span>
+        </div>
+      </a>
+    </div>
+    <button class="note-more" onclick="sendPrompt('noteの記事をもっと見たい')">noteでもっと読む →</button>
+  </div>
+</section>
+
+<!-- 8. SNS -->
+<section class="sns-section">
+  <p class="section-label" style="color:var(--sea-mid);">Follow &amp; Connect</p>
+  <p class="sns-title">もっと岡田ひろふみを知りたい方へ</p>
+  <p class="sns-sub">恋愛・復縁に関する情報を各プラットフォームで発信しています。<br>まずは読んで・見てみてください。</p>
+  <div class="sns-links">
+    <a class="sns-btn" href="https://note.com/" target="_blank">
+      <svg class="sns-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>note
+    </a>
+    <a class="sns-btn" href="https://x.com/" target="_blank">
+      <svg class="sns-icon" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X（Twitter）
+    </a>
+    <a class="sns-btn" href="https://instagram.com/" target="_blank">
+      <svg class="sns-icon" viewBox="0 0 24 24" fill="none" stroke="var(--sea-mid)" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="var(--sea-mid)" stroke="none"/></svg>Instagram
+    </a>
+    <a class="sns-btn" href="https://youtube.com/" target="_blank">
+      <svg class="sns-icon" viewBox="0 0 24 24"><path d="M21.582 7.186a2.506 2.506 0 00-1.768-1.768C18.254 5 12 5 12 5s-6.254 0-7.814.418a2.506 2.506 0 00-1.768 1.768C2 8.746 2 12 2 12s0 3.254.418 4.814a2.506 2.506 0 001.768 1.768C5.746 19 12 19 12 19s6.254 0 7.814-.418a2.506 2.506 0 001.768-1.768C22 15.254 22 12 22 12s0-3.254-.418-4.814zM10 15V9l5.2 3-5.2 3z"/></svg>YouTube
+    </a>
+    <a class="sns-btn" href="https://lounge.dmm.com/detail/6596/index/" target="_blank">
+      <svg class="sns-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>DMMサロン
+    </a>
+  </div>
+</section>
+
+<!-- 9. VOICE -->
+<section class="voice-section">
+  <p class="section-label">お客様の声</p>
+  <h2 class="section-title">相談してよかった、という声を<br>日々いただいています。</h2>
+  <div class="voice-grid">
+    <div class="voice-card">
+      <p class="voice-text">ネットで色々調べても不安が消えなかったのですが、岡田さんに相談して初めて具体的に動けました。復縁後に結婚しました。</p>
+      <p class="voice-name">30代・会社員</p>
+    </div>
+    <div class="voice-card">
+      <p class="voice-text">男性目線のアドバイスが本当に参考になりました。冷却期間なしで復縁できたのは信じられませんでした。</p>
+      <p class="voice-name">20代・フリーランス</p>
+    </div>
+    <div class="voice-card">
+      <p class="voice-text">誰にも言えなかった悩みも、岡田さんには安心して話せました。解決への糸口が見えてきました。</p>
+      <p class="voice-name">40代・主婦</p>
+    </div>
+  </div>
+</section>
+
+<!-- FREE CTA -->
+<section class="free-section">
+  <p class="section-label">まずは気軽に</p>
+  <h2 class="section-title">無料メール相談、受付中。</h2>
+  <p class="free-lead">「本当に相談していいのかな」と思っている方こそ、まず無料相談からどうぞ。あなたの状況をお聞きした上で、できることをお伝えします。</p>
+  <button class="btn-primary" style="font-size:13px;padding:16px 40px;" onclick="sendPrompt('無料メール相談に申し込む方法を教えてください')">無料で相談してみる</button>
+  <p class="free-disclaimer">※ 1日限定10名。相談内容の秘密は厳守されます。</p>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">岡田ひろふみ ／ 戦略的復縁プラン</div>
+      <div class="footer-tagline">あなたの恋愛に、寄り添う専門家</div>
+    </div>
+    <div class="footer-links">
+      <a href="#">サービスとは</a>
+      <a href="#">プロフィール</a>
+      <a href="#">プラン一覧</a>
+      <a href="https://lounge.dmm.com/detail/6596/index/" target="_blank">サロン</a>
+      <a href="#">お客様の声</a>
+      <a href="#">よくある質問</a>
+      <a href="#">無料相談</a>
+      <a href="#">会社概要</a>
+      <a href="#">プライバシーポリシー</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 岡田ひろふみ 戦略的復縁プラン. All Rights Reserved.</div>
+</footer>
