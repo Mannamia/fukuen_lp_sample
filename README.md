@@ -4,7 +4,7 @@
 This is a preview page for client review.
 
 ## URL
-https://〇〇〇〇.github.io/xxxxx/
+https://mannamia.github.io/fukuen_lp_sample/
 
 ## Tech
 - HTML / CSS
